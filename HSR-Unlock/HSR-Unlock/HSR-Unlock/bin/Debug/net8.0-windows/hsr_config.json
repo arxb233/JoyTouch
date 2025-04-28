@@ -1,0 +1,8 @@
+{
+  "ProcessPath": "E:\\Git\\HSR-Unlock\\HSR-Unlock\\HSR-Unlock\\bin\\Debug\\net8.0-windows\\show_args.bat",
+  "TargetFramerate": 120,
+  "FovDelta": 0.0,
+  "AutoStart": false,
+  "StartMinimized": false,
+  "UseMobileUI": true
+}
