@@ -102,3 +102,5 @@ MsgLButtonUp(wParam, lParam, msg, hwnd) {
 
 ; 按 F10 退出脚本
 F10::ExitApp
+
+;F:\Program Files\AutoHotKey\Compiler\Ahk2Exe.exe /in "F:\Github\github\WASDTouch\WASDTouch.ahk" /out "F:\Github\github\WASDTouch\bulid\WASDTouch.exe" /base "F:\Program Files\AutoHotKey\v2\AutoHotkey64.exe"
