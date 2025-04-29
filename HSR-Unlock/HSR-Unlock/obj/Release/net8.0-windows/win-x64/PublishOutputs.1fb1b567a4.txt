@@ -1,2 +1,0 @@
-E:\Git\HSR-Unlock\HSR-Unlock\HSR-Unlock\bin\Release\net8.0-windows\publish\win-x64\HSR-Unlock.pdb
-E:\Git\HSR-Unlock\HSR-Unlock\HSR-Unlock\bin\Release\net8.0-windows\publish\win-x64\HSR-Unlock.exe
