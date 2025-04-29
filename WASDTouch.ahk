@@ -100,18 +100,5 @@ MsgLButtonUp(wParam, lParam, msg, hwnd) {
     }
 }
 
-; 定时器检查长按状态（鼠标或触控离开时释放按键）
-SetTimer(CheckKeyStates, 50)
-
-CheckKeyStates() {
-    global keyMap, downKeys
-    for hwnd, key in downKeys {
-        if !GetKeyState("LButton", "P") {
-            Send("{" key " up}")
-            downKeys.Delete(hwnd)
-        }
-    }
-}
-
 ; 按 F10 退出脚本
 F10::ExitApp
