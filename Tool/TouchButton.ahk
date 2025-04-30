@@ -5,12 +5,16 @@ class TouchButton
     static keyMap := Map()
     static downKeys := Map()
     
-    static addKeyButton(x, y, label, key,myGui,btnSize,color := "3F51B5") {
-        btn := myGui.Add("Button", Format("x{} y{} w{} h{}", x, y, btnSize, btnSize), label)
-        btn.SetColor("3F51B5", "FFFFCC",, "fff5cc", 15)
-        TouchButton.keyMap[btn.Hwnd] := key
+    static addKeyButton(btnstyle,myGui) {
+        btncolor :=btnstyle["btncolor"]
+        btn := myGui.Add("Button", Format("x{} y{} w{} h{}", btnstyle["x"], btnstyle["y"], btnstyle["size"], btnstyle["size"]), btnstyle["label"])
+        btn.SetColor(
+            TouchButton.strToColor(btncolor["bgcolor"]),
+            TouchButton.strToColor(btncolor["fontcolor"]),,
+            TouchButton.strToColor(btncolor["bordercolor"]),15)
+        btn.SetFont("s" btncolor["fontsize"]) 
+        TouchButton.keyMap[btn.Hwnd] := btnstyle["key"]
     }
-
     static ColorLoad() {
         SetTimer(RefreshButtons, -50)
         RefreshButtons() {
@@ -19,6 +23,9 @@ class TouchButton
                 DllCall("InvalidateRect", "Ptr", hwnd, "Ptr", 0, "Int", true)
             }
         }       
+    }
+    static strToColor(color) {
+        return SubStr(color, 1, 1) = "#" ? "0x" SubStr(color, 2) : color
     }
     static Load() {
         static WM_LBUTTONDOWN := 0x201
