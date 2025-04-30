@@ -3,9 +3,11 @@
 Persistent
 #Include <ColorButton>
 #Include "./Tool/TouchButton.ahk"
+#Include "./Tool/DefaultConfig.ahk"
 #Include <JSON>
 
-config := Json.parse(FileRead("JoyTouch.json"))
+DefaultConfig.Ensure("JoyTouch.json")
+config := DefaultConfig.Load("JoyTouch.json")
 myGui := Gui("+AlwaysOnTop +ToolWindow -Caption +E0x08000000")
 myGui.BackColor := config["window"]["background"]
 

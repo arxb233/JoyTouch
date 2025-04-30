@@ -1,4 +1,4 @@
-{
+﻿{
     "buttons": [
         {
             "label": "W",
@@ -32,7 +32,7 @@
             "x": 80,
             "y": 80,
             "size": 70,
-           "btncolor": {
+        "btncolor": {
                 "bgcolor":"#3F51B5",
                 "fontcolor":"#FFFFCC",
                 "bordercolor": "#FFFFCC",
