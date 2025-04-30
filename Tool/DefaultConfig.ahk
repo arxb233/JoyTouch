@@ -9,6 +9,9 @@ class DefaultConfig {
     static Load(filePath) {
         return Json.parse(FileRead(filePath, "UTF-8"))
     }
+    static LoadObject(filePath) {
+        return Json.parse(FileRead(filePath, "UTF-8"),false,false)
+    }
 
     static DefaultJSON() {
         return '
