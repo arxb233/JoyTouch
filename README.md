@@ -1,4 +1,4 @@
-# WASDTouch - 手机虚拟WASD按键
+# JoyTouch - 手机虚拟WASD按键
 
 ## 这是什么？
 一个简单的小工具，让你用手机触屏模拟键盘的WASD按键，方便远程玩PC游戏。
