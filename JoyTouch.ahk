@@ -26,4 +26,20 @@ WinSetTransColor("0x" config["window"]["background"], "ahk_id " myGui.Hwnd)
 TouchButton.ColorLoad()
 TouchButton.Load()
 
-F10::ExitApp
+; 托盘设置
+A_IconTip := "JoyTouch 控制器"
+TraySetIcon("JoyTouch.png")
+
+A_TrayMenu.Delete()
+A_TrayMenu.Add("按键设计", (*) => Run(A_AhkPath " ./Tool/JoyTouchSetGUI.ahk"))
+A_TrayMenu.Add("显示窗口", ShowGui)
+A_TrayMenu.Add("隐藏窗口", HideGui)
+A_TrayMenu.Add("退出程序", (*) => ExitApp())
+
+ShowGui(*) {
+    myGui.Show()
+}
+
+HideGui(*) {
+    myGui.Hide()
+}
