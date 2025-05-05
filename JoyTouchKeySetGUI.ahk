@@ -174,7 +174,7 @@ MainGui.OnEvent("Close", (*) => ExitApp())
 A_IconTip := "JoyTouch设计器"
 
 A_TrayMenu.Delete()
-A_TrayMenu.Add("按键使用", (*) => Run(A_AhkPath " JoyTouch.ahk") ExitApp())
+A_TrayMenu.Add("按键使用", (*) => Run(A_AhkPath " JoyTouchKey.ahk") ExitApp())
 A_TrayMenu.Add("显示窗口", ShowGui)
 A_TrayMenu.Add("隐藏窗口", HideGui)
 A_TrayMenu.Add("退出程序", (*) => ExitApp())
