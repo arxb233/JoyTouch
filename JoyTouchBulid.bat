@@ -6,7 +6,7 @@ set "AHK_COMPILER=F:\Program Files\AutoHotKey\Compiler\Ahk2Exe.exe"
 set "AHK_BASE=F:\Program Files\AutoHotKey\v2\AutoHotkey64.exe"
 set "SCRIPT_IN=F:\Github\github\JoyTouch\JoyTouch.ahk"
 set "SCRIPT_OUT=F:\Github\github\JoyTouch\build\JoyTouch.exe"
-set "ICON_FILE=F:\Github\github\JoyTouch\JoyTouch.ico"
+set "ICON_FILE=F:\Github\github\JoyTouch\Tool\JoyTouch.ico"
 
 :: 检查编译器是否存在
 if not exist "%AHK_COMPILER%" (
@@ -49,7 +49,11 @@ if not exist "%OUT_DIR%" (
 
 :: 执行编译
 echo 正在编译 %SCRIPT_IN% ...
-"%AHK_COMPILER%" /in "%SCRIPT_IN%" /out "%SCRIPT_OUT%" /base "%AHK_BASE%" /icon "%ICON_FILE%"
+"%AHK_COMPILER%" ^
+    /in "%SCRIPT_IN%" ^
+    /out "%SCRIPT_OUT%" ^
+    /base "%AHK_BASE%" ^
+    /icon "%ICON_FILE%"
 
 :: 检查编译是否成功
 if errorlevel 1 (

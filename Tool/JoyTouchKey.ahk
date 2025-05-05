@@ -3,9 +3,10 @@
 #NoTrayIcon
 Persistent
 
-#Include "./Tool/TouchButton.ahk"
-#Include "./Tool/DefaultConfig.ahk"
-#Include <JSON>
+#Include "TouchButton.ahk"
+#Include "DefaultConfig.ahk"
+#Include "Json.ahk"
+;@Ahk2Exe-SetIcon Tool\JoyTouch.ico
 
 DefaultConfig.Ensure("JoyTouch.json")
 config := DefaultConfig.LoadObject("JoyTouch.json")

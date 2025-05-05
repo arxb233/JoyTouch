@@ -1,7 +1,7 @@
 #SingleInstance Force
-#Include <json>
-#Include "Tool/DefaultConfig.ahk"
-#Include "./Tool/TouchButton.ahk"
+#Include "Json.ahk"
+#Include "DefaultConfig.ahk"
+#Include "TouchButton.ahk"
 #NoTrayIcon
 
 ; 初始化 JSON 数据（从文件加载或嵌入）

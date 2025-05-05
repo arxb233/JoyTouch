@@ -1,0 +1,4 @@
+﻿{
+  "buttons":[{"btncolor":{"bgcolor":"#3F51B5","bordercolor":"#FFFFCC","fontcolor":"#FFFFCC","fontsize":15},"key":"w","label":"W","size":70,"x":80,"y":0},{"btncolor":{"bgcolor":"#3F51B5","bordercolor":"#FFFFCC","fontcolor":"#FFFFCC","fontsize":15},"key":"a","label":"A","size":70,"x":0,"y":80},{"btncolor":{"bgcolor":"#3F51B5","bordercolor":"#FFFFCC","fontcolor":"#FFFFCC","fontsize":15},"key":"s","label":"S","size":70,"x":80,"y":80},{"btncolor":{"bgcolor":"#3F51B5","bordercolor":"#FFFFCC","fontcolor":"#FFFFCC","fontsize":"15"},"key":"d","label":"D","size":"70","x":"160","y":"80"}],
+  "window":{"background":"000000","position":{"x":"366","y":"395"},"size":{"height":"160","width":"240"}}
+}

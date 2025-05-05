@@ -1,5 +1,5 @@
 #Requires AutoHotkey v2.0
-#Include "../Lib/Json.ahk"
+#Include "Json.ahk"
 class DefaultConfig {
     static Ensure(filePath) {
         if !FileExist(filePath)
@@ -67,7 +67,7 @@ class DefaultConfig {
                             "bgcolor":"#3F51B5",
                             "fontcolor":"#FFFFCC",
                             "bordercolor": "#FFFFCC",
-                            "fontsize": 10
+                            "fontsize": 15
                         }
                     }
                 ],

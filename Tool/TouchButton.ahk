@@ -1,5 +1,5 @@
 #Requires AutoHotkey v2.0
-#Include <ColorButton>
+#Include "ColorButton.ahk"
 
 class TouchButton
 {
