@@ -1,19 +1,20 @@
 #SingleInstance Force
-#Include "../Lib/Json.ahk"
-#Include "./DefaultConfig.ahk"
+#Include <json>
+#Include "Tool/DefaultConfig.ahk"
+#Include "./Tool/TouchButton.ahk"
 
 ; 初始化 JSON 数据（从文件加载或嵌入）
-jsonFile := "../JoyTouch.json"
+jsonFile := "JoyTouch.json"
 DefaultConfig.Ensure(jsonFile)
 jsonObj := DefaultConfig.LoadObject(jsonFile)
-
+TraySetIcon("JoyTouch.ico")
 ; 创建主 GUI
-MainGui := Gui("+Resize", "JSON GUI 设计器")
+MainGui := Gui("+Resize", "JoyTouch设计器")
 MainGui.SetFont("s10", "Segoe UI")
 
 ; 按钮列表和属性
 MainGui.Add("ListBox", "x10 y10 w200 h300 vButtonList", GetButtonList(jsonObj)).OnEvent("Change", SelectButton)
-MainGui.Add("GroupBox", "x220 y10 w250 h340", "按钮属性")
+MainGui.Add("GroupBox", "x220 y10 w250 h440", "按钮属性")
 MainGui.Add("Text", "x230 y30 w100", "标签:")
 MainGui.Add("Edit", "x330 y30 w120 vBtnLabel")
 MainGui.Add("Text", "x230 y60 w100", "键:")
@@ -37,7 +38,7 @@ MainGui.Add("Button", "x340 y300 w100", "添加按钮").OnEvent("Click", AddButt
 MainGui.Add("Button", "x230 y330 w100", "删除按钮").OnEvent("Click", DeleteButton)
 
 ; 窗口属性
-MainGui.Add("GroupBox", "x10 y320 w200 h150", "窗口属性")
+MainGui.Add("GroupBox", "x10 y320 w210 h350", "窗口属性")
 MainGui.Add("Text", "x20 y340 w100", "X 位置:")
 MainGui.Add("Edit", "x120 y340 w80 vWinX Number", jsonObj.window.position.x)
 MainGui.Add("Text", "x20 y370 w100", "Y 位置:")
@@ -52,14 +53,13 @@ MainGui.Add("Edit", "x120 y460 w80 vWinBg", jsonObj.window.background)
 ; 创建预览窗口
 PreviewGui := Gui("+ToolWindow", "预览")
 PreviewGui.BackColor := jsonObj.window.background
-WinSetRegion("0-0 " jsonObj.window.size.width "-0 " jsonObj.window.size.width "-" jsonObj.window.size.height " 0-" jsonObj.window.size.height " 0-0", PreviewGui)
 for index, btn in jsonObj.buttons
-    PreviewGui.Add("Button", "x" btn.x " y" btn.y " w" btn.size " h" btn.size, btn.label)
+    TouchButton.addKeyButton(btn,PreviewGui)
 PreviewGui.Show("x" jsonObj.window.position.x " y" jsonObj.window.position.y " w" jsonObj.window.size.width " h" jsonObj.window.size.height)
 
 ; 主 GUI 按钮
-MainGui.Add("Button", "x10 y480 w100", "保存 JSON").OnEvent("Click", SaveJSON)
-MainGui.Add("Button", "x120 y480 w100", "更新预览").OnEvent("Click", UpdatePreview)
+MainGui.Add("Button", "x10 y490 w100", "保存 JSON").OnEvent("Click", SaveJSON)
+MainGui.Add("Button", "x120 y490 w100", "更新预览").OnEvent("Click", UpdatePreview)
 MainGui.Show("w480 h520")
 
 ; 事件处理
@@ -134,9 +134,8 @@ UpdatePreview(Ctrl, Info) {
     PreviewGui.Destroy()
     PreviewGui := Gui("+ToolWindow", "预览")
     PreviewGui.BackColor := jsonObj.window.background
-    WinSetRegion("0-0 " jsonObj.window.size.width "-0 " jsonObj.window.size.width "-" jsonObj.window.size.height " 0-" jsonObj.window.size.height " 0-0", PreviewGui)
     for index, btn in jsonObj.buttons
-        PreviewGui.Add("Button", "x" btn.x " y" btn.y " w" btn.size " h" btn.size, btn.label)
+        TouchButton.addKeyButton(btn,PreviewGui)
     PreviewGui.Show("x" jsonObj.window.position.x " y" jsonObj.window.position.y " w" jsonObj.window.size.width " h" jsonObj.window.size.height)
 }
 
@@ -148,4 +147,42 @@ GetButtonList(obj) {
     return list
 }
 
+SetTimer(UpdatePosition, 100)
+
+UpdatePosition() {
+    try{
+        WinGetPos(&X, &Y, , , "预览")
+        MainGui["WinX"].Value := X
+        MainGui["WinY"].Value := Y 
+    }catch{
+        
+    }
+}
+MainGui["WinX"].OnEvent("Change", MovePreviewWindow)
+MainGui["WinY"].OnEvent("Change", MovePreviewWindow)
+
+MovePreviewWindow(GuiCtrl, *) {
+    X := MainGui["WinX"].Value
+    Y := MainGui["WinY"].Value
+    if (X != "" && Y != "") {
+        WinMove(X, Y, , , "预览")
+    }
+}
+
 MainGui.OnEvent("Close", (*) => ExitApp())
+
+A_IconTip := "JoyTouch设计器"
+
+A_TrayMenu.Delete()
+A_TrayMenu.Add("按键使用", (*) => Run(A_AhkPath " JoyTouch.ahk") ExitApp())
+A_TrayMenu.Add("显示窗口", ShowGui)
+A_TrayMenu.Add("隐藏窗口", HideGui)
+A_TrayMenu.Add("退出程序", (*) => ExitApp())
+
+ShowGui(*) {
+    MainGui.Show()
+}
+
+HideGui(*) {
+    MainGui.Hide()
+}
