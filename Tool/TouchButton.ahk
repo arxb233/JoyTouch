@@ -1,4 +1,5 @@
 #Requires AutoHotkey v2.0
+#Include <ColorButton>
 
 class TouchButton
 {
@@ -6,14 +7,16 @@ class TouchButton
     static downKeys := Map()
     
     static addKeyButton(btnstyle,myGui) {
-        btncolor :=btnstyle["btncolor"]
-        btn := myGui.Add("Button", Format("x{} y{} w{} h{}", btnstyle["x"], btnstyle["y"], btnstyle["size"], btnstyle["size"]), btnstyle["label"])
+        btn := myGui.Add("Button", Format("x{} y{} w{} h{}", btnstyle.x, btnstyle.y, btnstyle.size, btnstyle.size), btnstyle.label)
+        TouchButton.btnCustomstyle(btn,btnstyle.btncolor)
+        TouchButton.keyMap[btn.Hwnd] := btnstyle.key
+    }
+    static btnCustomstyle(btn,btncolor) {
         btn.SetColor(
-            TouchButton.strToColor(btncolor["bgcolor"]),
-            TouchButton.strToColor(btncolor["fontcolor"]),,
-            TouchButton.strToColor(btncolor["bordercolor"]),15)
-        btn.SetFont("s" btncolor["fontsize"]) 
-        TouchButton.keyMap[btn.Hwnd] := btnstyle["key"]
+            TouchButton.strToColor(btncolor.bgcolor),
+            TouchButton.strToColor(btncolor.fontcolor),,
+            TouchButton.strToColor(btncolor.bordercolor),15)
+        btn.SetFont("s" btncolor.fontsize) 
     }
     static ColorLoad() {
         SetTimer(RefreshButtons, -50)
