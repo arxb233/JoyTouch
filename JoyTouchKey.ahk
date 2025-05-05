@@ -1,5 +1,6 @@
 ﻿#Requires AutoHotkey v2.0
 #SingleInstance Force
+#NoTrayIcon
 Persistent
 
 #Include "./Tool/TouchButton.ahk"
@@ -26,19 +27,3 @@ WinSetTransColor("0x" config.window.background, "ahk_id " myGui.Hwnd)
 
 TouchButton.ColorLoad()
 TouchButton.Load()
-
-A_IconTip := "JoyTouch 控制器"
-
-A_TrayMenu.Delete()
-A_TrayMenu.Add("按键设计", (*) => Run(A_AhkPath " JoyTouchSetGUI.ahk") ExitApp())
-A_TrayMenu.Add("显示窗口", ShowGui)
-A_TrayMenu.Add("隐藏窗口", HideGui)
-A_TrayMenu.Add("退出程序", (*) => ExitApp())
-
-ShowGui(*) {
-    myGui.Show()
-}
-
-HideGui(*) {
-    myGui.Hide()
-}
